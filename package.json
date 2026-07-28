@@ -1,0 +1,23 @@
+{
+  "name": "4-week-project",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/KeithWass/movie-journal#readme",
+  "bugs": {
+    "url": "https://github.com/KeithWass/movie-journal/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KeithWass/movie-journal.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@hapi/hapi": "^21.4.10"
+  }
+}
