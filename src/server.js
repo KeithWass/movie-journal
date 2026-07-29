@@ -1,12 +1,13 @@
-"use strict";
-
-const Hapi = require("@hapi/hapi");
+import Hapi from "@hapi/hapi";
+import movieRoutes from "./routes/movieRoutes.js";
 
 const init = async () => {
   const server = Hapi.server({
     port: 3000,
     host: "localhost",
   });
+
+  server.route(movieRoutes);
 
   // health check route
   server.route({
@@ -27,7 +28,7 @@ const init = async () => {
         },
       };
 
-      return h.response(healthstatus).code(200);
+      return h.response(healthStatus).code(200);
     },
   });
 
@@ -40,7 +41,7 @@ const init = async () => {
   });
 
   await server.start();
-  console.log(`Server running on successfully at: " ${server.info.uri}`);
+  console.log(`Server running successfully at: " ${server.info.uri}`);
 };
 
 process.on("unhandledRejection", (err) => {

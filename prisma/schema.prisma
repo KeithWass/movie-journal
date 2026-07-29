@@ -15,6 +15,7 @@ datasource db {
 model MovieEntry {
   id             Int @id @default(autoincrement())
   tmdbId         Int
+  title          String
   personalRating Int?
   status         String
   journal        String?
