@@ -9,3 +9,16 @@ export async function createMovie(movieData) {
 export async function getAllMovies() {
   return await prisma.movieEntry.findMany();
 }
+
+export async function updateMovie(id, movieData) {
+  return await prisma.movieEntry.update({
+    where: { id: id },
+    data: movieData,
+  });
+}
+
+export async function deleteMovie(id, movieData) {
+  return await prisma.movieEntry.delete({
+    where: { id: id },
+  });
+}

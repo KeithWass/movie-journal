@@ -1,6 +1,10 @@
-import { createMovieController } from "../controllers/movieController.js";
+import {
+  createMovieController,
+  getAllMoviesController,
+  updateMovieController,
+  deleteMovieController,
+} from "../controllers/movieController.js";
 import { getAllMovies } from "../services/movieService.js";
-import { getAllMoviesController } from "../controllers/movieController.js";
 
 export default [
   {
@@ -19,5 +23,17 @@ export default [
     method: "GET",
     path: "/movies",
     handler: getAllMoviesController,
+  },
+
+  {
+    method: "PATCH",
+    path: "/movies/{id}",
+    handler: updateMovieController,
+  },
+
+  {
+    method: "DELETE",
+    path: "/movies/{id}",
+    handler: deleteMovieController,
   },
 ];
