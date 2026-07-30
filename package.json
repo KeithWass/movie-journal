@@ -16,7 +16,8 @@
   "main": "app.js",
   "scripts": {
     "start": "node src/server.js",
-    "test": "jest"
+    "test": "jest",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@hapi/hapi": "^21.4.10",
