@@ -15,9 +15,19 @@ export async function createMovieController(request, h) {
 }
 
 export async function getAllMoviesController(request, h) {
-  const movies = await getAllMovies();
+  try {
+    const movies = await getAllMovies();
 
-  return h.response(movies).code(200);
+    return h.response(movies).code(200);
+  } catch (err) {
+    console.error("GET /movies failed:", err);
+    return h
+      .response({
+        error: err.message,
+        stack: err.stack,
+      })
+      .code(500);
+  }
 }
 
 export async function getMovieByIdController(request, h) {
