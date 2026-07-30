@@ -1,6 +1,7 @@
 import {
   createMovieController,
   getAllMoviesController,
+  getMovieByIdController,
   updateMovieController,
   deleteMovieController,
 } from "../controllers/movieController.js";
@@ -23,6 +24,12 @@ export default [
     method: "GET",
     path: "/movies",
     handler: getAllMoviesController,
+  },
+
+  {
+    method: "GET",
+    path: "/movies/{id}",
+    handler: getMovieByIdController,
   },
 
   {

@@ -15,11 +15,15 @@
   "type": "module",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/server.js",
+    "test": "jest"
   },
   "dependencies": {
     "@hapi/hapi": "^21.4.10",
     "@prisma/client": "^6.19.3",
     "prisma": "^6.19.3"
+  },
+  "devDependencies": {
+    "jest": "^30.4.2"
   }
 }

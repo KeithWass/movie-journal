@@ -1,6 +1,7 @@
 import {
   createMovie,
   getAllMovies,
+  getMovieById,
   updateMovie,
   deleteMovie,
 } from "../services/movieService.js";
@@ -17,6 +18,14 @@ export async function getAllMoviesController(request, h) {
   const movies = await getAllMovies();
 
   return h.response(movies).code(200);
+}
+
+export async function getMovieByIdController(request, h) {
+  const id = parseInt(request.params.id, 10);
+
+  const movie = await getMovieById(id);
+
+  return h.response(movie).code(200);
 }
 
 export async function updateMovieController(request, h) {
