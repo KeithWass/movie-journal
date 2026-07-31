@@ -16,7 +16,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node src/server.js",
-    "test": "jest",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "postinstall": "prisma generate"
   },
   "dependencies": {
