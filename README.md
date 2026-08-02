@@ -10,8 +10,15 @@ A full stack web application that aloows users to discover, save and organise mo
 - PostgreSQL
 - React
 - Jest
-- Playwright
 
 ## Current Status
 
-Week 1 - Backend Development
+Week 1 - Backend Endpoints:
+
+POST /movies
+GET /movies
+GET /movies/{id}
+PATCH /movies/{id}
+DELETE /movies/{id}
+
+
