@@ -13,7 +13,8 @@ A full stack web application that aloows users to discover, save and organise mo
 
 ## Current Status
 
-Week 1 - Backend Endpoints:
+Week 1 
+Endpoints:
 
 POST /movies
 GET /movies
