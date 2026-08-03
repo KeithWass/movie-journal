@@ -1,6 +1,6 @@
 # Movie Journal
 
-A full stack web application that aloows users to discover, save and organise movies into a personal journal.
+A full stack web application that allows users to discover, save and organise movies into a personal journal as well as have movies recommended depending on personal tastes.
 
 ## Tech Stack
 
@@ -16,10 +16,10 @@ A full stack web application that aloows users to discover, save and organise mo
 Week 1 
 Endpoints:
 
-POST /movies
-GET /movies
-GET /movies/{id}
-PATCH /movies/{id}
-DELETE /movies/{id}
+- POST /movies
+- GET /movies
+- GET /movies/{id}
+- PATCH /movies/{id}
+- DELETE /movies/{id}
 
 
