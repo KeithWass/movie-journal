@@ -1,5 +1,13 @@
-node_modules
+/node_modules
 
 /generated/prisma
 
 .env
+
+.agents
+
+.claude
+
+.windsurf
+
+
