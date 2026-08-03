@@ -21,4 +21,17 @@ model MovieEntry {
   journal        String?
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
+  userId       Int?
+  user User?   @relation(fields: [userId], references: [id])
+}
+
+model User {
+  id           Int    @id @default(autoincrement())
+  username     String @unique
+  email        String @unique
+  passwordHash String
+  role         String
+  createdAt    DateTime @default(now())
+  movies       MovieEntry[]
+  
 }

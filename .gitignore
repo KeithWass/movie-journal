@@ -4,10 +4,10 @@
 
 .env
 
-.agents
+.agents/
 
-.claude
+.claude/
 
-.windsurf
+.windsurf/
 
 

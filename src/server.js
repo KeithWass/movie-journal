@@ -1,5 +1,6 @@
 import Hapi from "@hapi/hapi";
 import movieRoutes from "./routes/movieRoutes.js";
+import auth from "./routes/auth.js";
 
 const init = async () => {
   const server = Hapi.server({
@@ -8,6 +9,8 @@ const init = async () => {
   });
 
   server.route(movieRoutes);
+
+  server.route(auth);
 
   // health check route
   server.route({
