@@ -11,6 +11,30 @@ const init = async () => {
 
   await server.register(Jwt);
 
+  server.auth.strategy("jwt_strategy", "jwt", {
+    keys: process.env.JWT_SECRET,
+    verify: {
+      //audience
+      aud: false,
+      //issuer
+      iss: false,
+      //subject
+      sub: false,
+      maxAgeSec: 3600,
+    },
+    validate: (artifacts, request, h) => {
+      return {
+        isValid: true,
+        credentials: {
+          userId: artifacts.decoded.payload.uderId,
+          role: artifacts.decoded.payload.role,
+        },
+      };
+    },
+  });
+
+  server.auth.default("jwt_strategy");
+
   server.route(movieRoutes);
 
   server.route([register, login]);
