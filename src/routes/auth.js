@@ -5,6 +5,8 @@ import jwt from "jsonwebtoken";
 const register = {
   method: "POST",
   path: "/register",
+  options: { auth: false },
+
   handler: async (request, h) => {
     const { username, email, password, role } = request.payload;
 
@@ -33,6 +35,10 @@ const register = {
 const login = {
   method: "POST",
   path: "/login",
+  options: {
+    auth: false,
+  },
+
   handler: async (request, h) => {
     const { email, password } = request.payload;
 
