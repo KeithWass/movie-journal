@@ -1,12 +1,15 @@
 import Hapi from "@hapi/hapi";
 import movieRoutes from "./routes/movieRoutes.js";
 import { register, login } from "./routes/auth.js";
+import Jwt from "@hapi/jwt";
 
 const init = async () => {
   const server = Hapi.server({
     port: process.env.PORT || 3000,
     host: "0.0.0.0",
   });
+
+  await server.register(Jwt);
 
   server.route(movieRoutes);
 
