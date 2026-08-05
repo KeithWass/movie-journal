@@ -7,13 +7,13 @@ import {
 } from "../services/movieService.js";
 
 export async function createMovieController(request, h) {
+  console.log("AUTH CREDENTIALS:", request.auth.credentials);
+  console.log("USER ID:", request.auth.credentials.userId);
+
   const movieData = request.payload;
   const userId = request.auth.credentials.userId;
 
-  const movie = await createMovie(movieData);
-
-  console.log("AUTH CREDENTIALS:", request.auth.credentials);
-  console.log("USER ID:", request.auth.credentials.userId);
+  const movie = await createMovie(movieData, userId);
 
   return h.response(movie).code(201);
 }
@@ -21,7 +21,7 @@ export async function createMovieController(request, h) {
 export async function getAllMoviesController(request, h) {
   try {
     const userId = request.auth.credentials.userId;
-    const movies = await getAllMovies();
+    const movies = await getAllMovies(userId);
 
     return h.response(movies).code(200);
   } catch (err) {
@@ -53,9 +53,9 @@ export async function getMovieByIdController(request, h) {
 }
 
 export async function updateMovieController(request, h) {
-  const movieData = request.payload;
   const id = parseInt(request.params.id, 10);
-  const userId = request.auth.credentials.userId;
+  const movieData = request.payload;
+  const loggedInUserId = request.auth.credentials.userId;
 
   const existingMovie = await getMovieById(id);
 
@@ -63,7 +63,7 @@ export async function updateMovieController(request, h) {
     return h.response({ error: "Movie not found" }).code(404);
   }
 
-  if (existingMovie.userId !== userId) {
+  if (existingMovie.userId !== loggedInUserId) {
     return h.response({ error: "Forbidden" }).code(403);
   }
 
@@ -74,7 +74,7 @@ export async function updateMovieController(request, h) {
 
 export async function deleteMovieController(request, h) {
   const id = parseInt(request.params.id);
-  const userId = request.auth.credentials.userId;
+  const loggedInUserId = request.auth.credentials.userId;
 
   const existingMovie = await getMovieById(id);
 
@@ -82,7 +82,7 @@ export async function deleteMovieController(request, h) {
     return h.response({ error: "Movie not found" }).code(404);
   }
 
-  if (!existingMovie) {
+  if (existingMovie.userId !== loggedInUserId) {
     return h.response({ error: "Forbidden" }).code(403);
   }
 
