@@ -12,6 +12,9 @@ export async function createMovieController(request, h) {
 
   const movie = await createMovie(movieData);
 
+  console.log("AUTH CREDENTIALS:", request.auth.credentials);
+  console.log("USER ID:", request.auth.credentials.userId);
+
   return h.response(movie).code(201);
 }
 
