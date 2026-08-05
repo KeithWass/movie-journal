@@ -42,7 +42,7 @@ export async function getMovieByIdController(request, h) {
     return h.response({ error: "Movie not found" }).code(404);
   }
 
-  if (movieRoutes.uderId !== userId) {
+  if (movieRoutes.userId !== userId) {
     return h.response({ error: "Forbidden" }).code(403);
   }
 

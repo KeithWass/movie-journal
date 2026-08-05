@@ -26,7 +26,7 @@ const init = async () => {
       return {
         isValid: true,
         credentials: {
-          userId: artifacts.decoded.payload.uderId,
+          userId: artifacts.decoded.payload.userId,
           role: artifacts.decoded.payload.role,
         },
       };
