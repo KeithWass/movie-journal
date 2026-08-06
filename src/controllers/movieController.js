@@ -6,12 +6,11 @@ import {
   deleteMovie,
 } from "../services/movieService.js";
 
-export async function createMovieController(request, h) {
-  console.log("AUTH CREDENTIALS:", request.auth.credentials);
-  console.log("USER ID:", request.auth.credentials.userId);
+import prisma from "../lib/prisma.js";
 
+export async function createMovieController(request, h) {
   const movieData = request.payload;
-  const userId = request.auth.credentials.userId;
+  const { userId } = request.auth.credentials;
 
   const movie = await createMovie(movieData, userId);
 
@@ -20,16 +19,29 @@ export async function createMovieController(request, h) {
 
 export async function getAllMoviesController(request, h) {
   try {
-    const userId = request.auth.credentials.userId;
-    const movies = await getAllMovies(userId);
+    const { userId, role } = request.auth.credentials;
+
+    console.log("GET MOVIES USER:", { userId, role });
+
+    const allMovies = await prisma.movieEntry.findMany();
+
+    const userMovies = await prisma.movieEntry.findMany({
+      where: { userId },
+    });
+
+    console.log(allMovies);
+    console.log(`MOVIES FOR USER ${userId}:`, userMovies);
+
+    const movies =
+      role === "admin" ? await getAllMovies() : await getAllMovies(userId);
 
     return h.response(movies).code(200);
   } catch (err) {
     console.error("GET /movies failed:", err);
+
     return h
       .response({
-        error: err.message,
-        stack: err.stack,
+        error: "Internal server error",
       })
       .code(500);
   }
@@ -37,7 +49,7 @@ export async function getAllMoviesController(request, h) {
 
 export async function getMovieByIdController(request, h) {
   const id = parseInt(request.params.id, 10);
-  const userId = request.auth.credentials.userId;
+  const { userId, role } = request.auth.credentials;
 
   const movie = await getMovieById(id);
 
@@ -45,7 +57,7 @@ export async function getMovieByIdController(request, h) {
     return h.response({ error: "Movie not found" }).code(404);
   }
 
-  if (movie.userId !== userId) {
+  if (role !== "admin" && movie.userId !== userId) {
     return h.response({ error: "Forbidden" }).code(403);
   }
 
@@ -54,8 +66,8 @@ export async function getMovieByIdController(request, h) {
 
 export async function updateMovieController(request, h) {
   const id = parseInt(request.params.id, 10);
-  const movieData = request.payload;
-  const loggedInUserId = request.auth.credentials.userId;
+  const { userId: ignoredUserId, ...movieData } = request.payload;
+  const { userId, role } = request.auth.credentials;
 
   const existingMovie = await getMovieById(id);
 
@@ -63,7 +75,7 @@ export async function updateMovieController(request, h) {
     return h.response({ error: "Movie not found" }).code(404);
   }
 
-  if (existingMovie.userId !== loggedInUserId) {
+  if (role !== "admin" && existingMovie.userId !== userId) {
     return h.response({ error: "Forbidden" }).code(403);
   }
 
@@ -74,7 +86,7 @@ export async function updateMovieController(request, h) {
 
 export async function deleteMovieController(request, h) {
   const id = parseInt(request.params.id);
-  const loggedInUserId = request.auth.credentials.userId;
+  const { userId, role } = request.auth.credentials;
 
   const existingMovie = await getMovieById(id);
 
@@ -82,7 +94,7 @@ export async function deleteMovieController(request, h) {
     return h.response({ error: "Movie not found" }).code(404);
   }
 
-  if (existingMovie.userId !== loggedInUserId) {
+  if (role !== "admin" && existingMovie.userId !== userId) {
     return h.response({ error: "Forbidden" }).code(403);
   }
 

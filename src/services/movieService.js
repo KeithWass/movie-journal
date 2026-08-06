@@ -11,7 +11,7 @@ export async function createMovie(movieData, userId) {
 
 export async function getAllMovies(userId) {
   return await prisma.movieEntry.findMany({
-    where: { userId },
+    where: userId === undefined ? {} : { userId },
   });
 }
 
