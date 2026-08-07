@@ -76,9 +76,6 @@ describe("Movie Service", () => {
 
     const result = await getMovieById(1);
 
-    console.log(fakeMovie);
-    console.log(result);
-
     expect(result).toEqual(fakeMovie);
 
     expect(prisma.movieEntry.findUnique).toHaveBeenCalledWith({
