@@ -46,9 +46,9 @@ Protected routes require a valid JWT to be sent as a Bearer token in the `Author
 
 ## Authentication & Authorisation
 
-This project uses **JSON Web Tokens (JWT)** for stateless authentication.
+This project uses **JSON Web Tokens (JWT)** for stateless authentication. I chose JWT rather than server-side sessions because the application uses a separate React frontend and Hapi backend. After login, the frontend can send the JWT with each protected API request in the Authorization header, allowing the backend to authenticate the user without maintaining server-side session state. This approach also fits the application's cross-origin client/API architecture, where the frontend and backend are deployed separately.
 
-Passwords are securely hashed using **bcrypt** before being stored in the database.
+Passwords are securely hashed using bcrypt before being stored in the database.
 
 Authorisation rules include:
 
