@@ -4,16 +4,11 @@ Movie Journal is a full-stack web application that allows users to discover, sav
 
 ## Features
 
-### Week 1
-
 - Full CRUD functionality for movie entries
 - RESTful API built with Hapi.js
 - Prisma ORM with PostgreSQL database
 - Deployed backend using Railway
 - Unit testing with Jest
-
-### Week 2
-
 - User registration and login
 - Password hashing using bcrypt
 - JWT authentication
@@ -97,8 +92,6 @@ Import the collection into Postman, register or log in to obtain a JWT, then use
 - Postman
 
 ## Current Status
-
-**Week 2 Complete**
 
 ### Completed
 
