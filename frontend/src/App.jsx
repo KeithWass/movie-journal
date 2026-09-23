@@ -1,6 +1,9 @@
 import { useState } from "react";
 import "./App.css";
 import Login from "./components/Login";
+import Logout from "./components/Logout";
+import MovieList from "./components/MovieList";
+import AddMovie from "./components/AddMovie";
 
 function App() {
   const [token, setToken] = useState("");
@@ -29,19 +32,16 @@ function App() {
 
   return (
     <>
-      <button onClick={checkApi}>Check API</button>
+      {/* <button onClick={checkApi}>Check API</button> */}
 
       {!token && <Login setToken={setToken} />}
 
       {token && (
         <div>
           <button onClick={getMovies}>Get Movies</button>
-          {movies.map((movie) => (
-            <div key={movie.id}>
-              <h2>{movie.title}</h2>
-              <p>{movie.description}</p>
-            </div>
-          ))}
+          <Logout setToken={setToken} />
+          <MovieList movies={movies} />
+          <AddMovie token={token} />
         </div>
       )}
     </>
