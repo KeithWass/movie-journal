@@ -38,10 +38,10 @@ function App() {
 
       {token && (
         <div>
-          <button onClick={getMovies}>Get Movies</button>
+          {/* <button onClick={getMovies}>Get Movies</button> */}
           <Logout setToken={setToken} />
           <MovieList movies={movies} />
-          <AddMovie token={token} />
+          <AddMovie token={token} onMovieAdded={getMovies} />
         </div>
       )}
     </>

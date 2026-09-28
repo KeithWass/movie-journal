@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function AddMovie({ token }) {
+function AddMovie({ token, onMovieAdded }) {
   const [tmdbId, setTmdbId] = useState(0);
   const [title, setTitle] = useState("");
   const [status, setStatus] = useState("");
@@ -28,7 +28,9 @@ function AddMovie({ token }) {
     );
 
     const data = await response.json();
-    console.log(data);
+    if (response.ok) {
+      onMovieAdded();
+    }
   }
   return (
     <form onSubmit={handleAddMovie}>
