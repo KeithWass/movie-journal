@@ -4,6 +4,7 @@ import Login from "./components/Login";
 import Logout from "./components/Logout";
 import MovieList from "./components/MovieList";
 import AddMovie from "./components/AddMovie";
+import MovieSearch from "./components/MovieSearch";
 
 function App() {
   const [token, setToken] = useState("");
@@ -35,6 +36,8 @@ function App() {
       {/* <button onClick={checkApi}>Check API</button> */}
 
       {!token && <Login setToken={setToken} />}
+
+      <MovieSearch />
 
       {token && (
         <div>

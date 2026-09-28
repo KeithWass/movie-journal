@@ -1,5 +1,6 @@
 import Hapi from "@hapi/hapi";
 import movieRoutes from "./routes/movieRoutes.js";
+import tmdbRoutes from "./routes/tmdbRoutes.js";
 import { register, login } from "./routes/auth.js";
 import Jwt from "@hapi/jwt";
 
@@ -36,6 +37,7 @@ export async function buildServer() {
   server.auth.default("jwt_strategy");
 
   server.route(movieRoutes);
+  server.route(tmdbRoutes);
   server.route([register, login]);
 
   // health check route
