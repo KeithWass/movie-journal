@@ -1,11 +1,10 @@
+import FilmCard from "./FilmCard";
+
 function MovieList({ movies }) {
   return (
-    <div>
+    <div className="movie-grid">
       {movies.map((movie) => (
-        <div key={movie.id}>
-          <h2>{movie.title}</h2>
-          <p>{movie.description}</p>
-        </div>
+        <FilmCard key={movie.id} movie={movie} />
       ))}
     </div>
   );

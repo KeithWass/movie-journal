@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import Login from "./components/Login";
 import Logout from "./components/Logout";
@@ -9,6 +9,7 @@ import MovieSearch from "./components/MovieSearch";
 function App() {
   const [token, setToken] = useState("");
   const [movies, setMovies] = useState([]);
+  const [selectedMovie, setSelectedMovie] = useState(null);
 
   async function checkApi() {
     const response = await fetch(
@@ -31,20 +32,29 @@ function App() {
     setMovies(data);
   }
 
+  useEffect(() => {
+    if (token) {
+      getMovies();
+    }
+  }, [token]);
+
   return (
     <>
       {/* <button onClick={checkApi}>Check API</button> */}
 
       {!token && <Login setToken={setToken} />}
 
-      <MovieSearch />
+      <MovieSearch onMovieSelected={setSelectedMovie} />
 
       {token && (
         <div>
-          {/* <button onClick={getMovies}>Get Movies</button> */}
           <Logout setToken={setToken} />
           <MovieList movies={movies} />
-          <AddMovie token={token} onMovieAdded={getMovies} />
+          <AddMovie
+            token={token}
+            onMovieAdded={getMovies}
+            selectedMovie={selectedMovie}
+          />
         </div>
       )}
     </>

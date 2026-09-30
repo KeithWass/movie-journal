@@ -16,6 +16,7 @@ model MovieEntry {
   id             Int @id @default(autoincrement())
   tmdbId         Int
   title          String
+  posterPath     String?
   personalRating Int?
   status         String
   journal        String?

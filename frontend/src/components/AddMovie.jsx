@@ -1,11 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-function AddMovie({ token, onMovieAdded }) {
+function AddMovie({ token, onMovieAdded, selectedMovie }) {
   const [tmdbId, setTmdbId] = useState(0);
   const [title, setTitle] = useState("");
   const [status, setStatus] = useState("");
   const [personalRating, setPersonalRating] = useState(0);
   const [journal, setJournal] = useState("");
+  const [posterPath, setPosterPath] = useState("");
+
+  useEffect(() => {
+    if (selectedMovie) {
+      setTmdbId(selectedMovie.id);
+      setTitle(selectedMovie.title);
+      setPosterPath(selectedMovie.posterPath);
+    }
+  }, [selectedMovie]);
 
   async function handleAddMovie(e) {
     e.preventDefault();
@@ -20,6 +29,7 @@ function AddMovie({ token, onMovieAdded }) {
         body: JSON.stringify({
           tmdbId,
           title,
+          posterPath,
           status,
           personalRating,
           journal,
@@ -28,6 +38,9 @@ function AddMovie({ token, onMovieAdded }) {
     );
 
     const data = await response.json();
+
+    console.log("Add movie response:", response.status, data);
+
     if (response.ok) {
       onMovieAdded();
     }

@@ -1,0 +1,58 @@
+body {
+  font-family: "DM sans", sans-serif;
+  font-weight: 100;
+  background-color: #efefef;
+}
+
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 220px));
+  gap: 3rem;
+  padding: 30;
+  list-style: none;
+}
+
+.film-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem;
+  border: 0.5px solid #444;
+  border-radius: 8px;
+  background-color: #efefef;
+  color: #444;
+}
+
+.search-results {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 0;
+  list-style: none;
+}
+
+.film-poster {
+  width: 100px;
+  height: auto;
+  flex-shrink: 0;
+  border-radius: 4px;
+}
+
+.film-details {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.film-title {
+  font-family: "DM sans", sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  margin: 0 0 0.5rem;
+}
+
+.film-description {
+  margin: 0;
+  font-size: 15px;
+}
