@@ -16,15 +16,20 @@ function MovieSearch({ onMovieSelected }) {
   }
 
   return (
-    <div>
-      <h2>Search for a film</h2>
-      <input
-        type="text"
-        value={searchTerm}
-        onChange={(event) => setSearchTerm(event.target.value)}
-        placeholder="Search for a film..."
-      />
-      <button onClick={handleSearch}>Search</button>
+    <div className="movie-search">
+      <div className="search-hero">
+        <h2>Search for a film</h2>
+
+        <div className="search-bar">
+          <input
+            type="text"
+            value={searchTerm}
+            onChange={(event) => setSearchTerm(event.target.value)}
+            placeholder="Search for a film..."
+          />
+          <button onClick={handleSearch}>Search</button>
+        </div>
+      </div>
       <ul className="search-results">
         {results.map((movie) => (
           <li
@@ -46,6 +51,7 @@ function MovieSearch({ onMovieSelected }) {
           </li>
         ))}
       </ul>
+
       {selectedMovie && (
         <div>
           <h3>Selected Film</h3>
