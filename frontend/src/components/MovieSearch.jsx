@@ -18,8 +18,6 @@ function MovieSearch({ onMovieSelected }) {
   return (
     <div className="movie-search">
       <div className="search-hero">
-        <h2>Search for a film</h2>
-
         <div className="search-bar">
           <input
             type="text"
@@ -46,18 +44,12 @@ function MovieSearch({ onMovieSelected }) {
             />
             <div className="film-details">
               <h2 className="film-title">{movie.title}</h2>
+              <p className="film-year">({movie.releaseDate.slice(0, 4)})</p>
               <p className="film-description">{movie.overview}</p>
             </div>
           </li>
         ))}
       </ul>
-
-      {selectedMovie && (
-        <div>
-          <h3>Selected Film</h3>
-          <p>{selectedMovie.title}</p>
-        </div>
-      )}
     </div>
   );
 }

@@ -1,8 +1,10 @@
 function Header() {
   return (
-    <header>
-      <h1>DFD</h1>
-      <p>Digital Film Dossier</p>
+    <header className="site-header">
+      <div className="brand">
+        <h1>DFD</h1>
+        <p>Digital Film Dossier</p>
+      </div>
     </header>
   );
 }

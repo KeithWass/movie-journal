@@ -9,6 +9,9 @@ function FilmCard({ movie }) {
       />
       <div className="film-details">
         <h2 className="film-title">{movie.title}</h2>
+        {movie.releaseDate && (
+          <p className="film-year">({movie.releaseDate.slice(0, 4)})</p>
+        )}
         <p className="film-description">{movie.description}</p>
       </div>
     </div>

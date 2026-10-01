@@ -7,12 +7,14 @@ function AddMovie({ token, onMovieAdded, selectedMovie }) {
   const [personalRating, setPersonalRating] = useState(0);
   const [journal, setJournal] = useState("");
   const [posterPath, setPosterPath] = useState("");
+  const [releaseDate, setReleaseDate] = useState("");
 
   useEffect(() => {
     if (selectedMovie) {
       setTmdbId(selectedMovie.id);
       setTitle(selectedMovie.title);
       setPosterPath(selectedMovie.posterPath);
+      setReleaseDate(selectedMovie.releaseDate);
     }
   }, [selectedMovie]);
 
@@ -29,6 +31,7 @@ function AddMovie({ token, onMovieAdded, selectedMovie }) {
         body: JSON.stringify({
           tmdbId,
           title,
+          releaseDate,
           posterPath,
           status,
           personalRating,
