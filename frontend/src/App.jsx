@@ -34,6 +34,7 @@ function App() {
       },
     );
     const data = await response.json();
+    console.log("GET MOVIES:", response.status, data);
     setMovies(data);
   }
 
