@@ -19,7 +19,7 @@ model MovieEntry {
   releaseDate    String?
   posterPath     String?
   personalRating Int?
-  status         String
+  watched        Boolean @default(false)
   journal        String?
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
