@@ -18,6 +18,8 @@ function MovieSearch({ onMovieSelected }) {
   return (
     <div className="movie-search">
       <div className="search-hero">
+        <h2>Welcome to the film archive</h2>
+
         <div className="search-bar">
           <input
             type="text"

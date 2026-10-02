@@ -6,11 +6,15 @@ import MovieList from "./components/MovieList";
 import AddMovie from "./components/AddMovie";
 import MovieSearch from "./components/MovieSearch";
 import Header from "./components/Header";
+import Signup from "./components/Signup";
 
 function App() {
   const [token, setToken] = useState("");
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
+  const [loginOpen, setLoginOpen] = useState(false);
+  const [signupOpen, setSignupOpen] = useState(false);
+  const [username, setUsername] = useState("");
 
   async function checkApi() {
     const response = await fetch(
@@ -41,15 +45,30 @@ function App() {
 
   return (
     <>
-      <Header />
+      <Header
+        onLogin={() => setLoginOpen(true)}
+        token={token}
+        setToken={setToken}
+      />
 
-      {!token && <Login setToken={setToken} />}
+      {loginOpen && (
+        <Login
+          setToken={setToken}
+          setUsername={setUsername}
+          onClose={() => setLoginOpen(false)}
+          onSignup={() => {
+            setLoginOpen(false);
+            setSignupOpen(true);
+          }}
+        />
+      )}
+
+      {signupOpen && <Signup onClose={() => setSignupOpen(false)} />}
 
       <MovieSearch onMovieSelected={setSelectedMovie} />
 
       {token && (
         <div>
-          <Logout setToken={setToken} />
           <MovieList movies={movies} />
           <AddMovie
             token={token}
