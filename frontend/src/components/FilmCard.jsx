@@ -1,3 +1,5 @@
+import "./FilmCard.css";
+
 function FilmCard({ movie }) {
   console.log(movie);
 

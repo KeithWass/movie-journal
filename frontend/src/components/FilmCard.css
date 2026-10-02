@@ -1,0 +1,51 @@
+.film-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f7f7f7;
+  color: #444;
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08); */
+}
+
+.film-card:hover {
+  transform: translateY(-2px);
+}
+
+.film-poster {
+  width: 100px;
+  height: auto;
+  flex-shrink: 0;
+  border-radius: 4px;
+}
+
+.film-details {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.film-title {
+  font-family: "DM sans", sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  margin: 0 0 0.5rem;
+}
+
+.film-description {
+  margin: 0;
+  font-size: 15px;
+}
+
+.film-year {
+  margin: -0.3rem 0 0.8rem;
+  font-size: 0.85rem;
+  color: #999;
+}

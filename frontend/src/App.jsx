@@ -49,6 +49,7 @@ function App() {
         onLogin={() => setLoginOpen(true)}
         token={token}
         setToken={setToken}
+        username={username}
       />
 
       {loginOpen && (
@@ -74,6 +75,7 @@ function App() {
             token={token}
             onMovieAdded={getMovies}
             selectedMovie={selectedMovie}
+            onClose={() => setSelectedMovie(null)}
           />
         </div>
       )}

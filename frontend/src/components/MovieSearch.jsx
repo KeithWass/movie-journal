@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./MovieSearch.css";
 
 function MovieSearch({ onMovieSelected }) {
   const [searchTerm, setSearchTerm] = useState("");

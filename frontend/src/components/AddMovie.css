@@ -1,0 +1,71 @@
+.add-movie-modal {
+  width: 500px;
+  max-width: 90%;
+  padding: 2rem;
+  background-color: #f7f7f7;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+  position: relative;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.add-movie-modal h2 {
+  margin-top: 0;
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+.selected-film {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.selected-film img {
+  width: 80px;
+  height: auto;
+  border-radius: 4px;
+}
+
+.selected-film h3 {
+  margin: 0 0 0.4rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.selected-film p {
+  margin: 0;
+  color: #888;
+  font-size: 0.9rem;
+}
+
+.watched-control {
+  margin-bottom: 1.5rem;
+}
+
+.watched-control p {
+  margin: 0 0 0.6rem;
+  font-size: 0.9rem;
+}
+
+.watched-options {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.watched-options button {
+  padding: 0.6rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fff;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.watched-options button.selected {
+  background-color: #444;
+  color: white;
+  border-color: #444;
+}
