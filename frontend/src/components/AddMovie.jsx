@@ -43,8 +43,6 @@ function AddMovie({ token, onMovieAdded, selectedMovie, onClose }) {
 
     const data = await response.json();
 
-    console.log("Add movie response:", response.status, data);
-
     if (response.ok) {
       onMovieAdded();
       onClose();
