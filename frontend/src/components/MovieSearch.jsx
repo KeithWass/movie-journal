@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./MovieSearch.css";
+const API_URL = import.meta.env.VITE_API_URL;
 
 function MovieSearch({ onMovieSelected }) {
   const [searchTerm, setSearchTerm] = useState("");
@@ -8,7 +9,7 @@ function MovieSearch({ onMovieSelected }) {
 
   async function handleSearch() {
     const response = await fetch(
-      `http://localhost:3000/tmdb/search?query=${encodeURIComponent(searchTerm)}`,
+      `${API_URL}/tmdb/search?query=${encodeURIComponent(searchTerm)}`,
     );
 
     const data = await response.json();

@@ -1,7 +1,6 @@
-import { use } from "react";
 import { useState } from "react";
 
-function Signup({ onClose }) {
+function Signup({ onClose, setToken, setUsername }) {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -25,8 +24,13 @@ function Signup({ onClose }) {
     );
 
     const data = await response.json();
-
     console.log("Signup response:", response.status, data);
+
+    if (response.ok) {
+      setToken(data.token);
+      setUsername(data.user.username);
+      onClose();
+    }
   }
 
   return (

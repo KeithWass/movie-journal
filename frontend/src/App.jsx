@@ -8,6 +8,7 @@ import MovieSearch from "./components/MovieSearch";
 import Header from "./components/Header";
 import Signup from "./components/Signup";
 import NotSureWhatToWatch from "./components/NotSureWhatToWatch";
+const API_URL = import.meta.env.VITE_API_URL;
 
 function App() {
   const [token, setToken] = useState("");
@@ -18,22 +19,17 @@ function App() {
   const [username, setUsername] = useState("");
 
   async function checkApi() {
-    const response = await fetch(
-      "https://movie-journal-o7uq.onrender.com/healthcheck",
-    );
+    const response = await fetch(`${API_URL}/healthcheck`);
     const data = await response.json();
     console.log(data);
   }
 
   async function getMovies() {
-    const response = await fetch(
-      "https://movie-journal-o7uq.onrender.com/movies",
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+    const response = await fetch(`${API_URL}/movies`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
       },
-    );
+    });
     const data = await response.json();
 
     setMovies(data);
@@ -66,7 +62,13 @@ function App() {
         />
       )}
 
-      {signupOpen && <Signup onClose={() => setSignupOpen(false)} />}
+      {signupOpen && (
+        <Signup
+          onClose={() => setSignupOpen(false)}
+          setToken={setToken}
+          setUsername={setUsername}
+        />
+      )}
 
       <MovieSearch onMovieSelected={setSelectedMovie} />
 
