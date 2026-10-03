@@ -7,6 +7,7 @@ import AddMovie from "./components/AddMovie";
 import MovieSearch from "./components/MovieSearch";
 import Header from "./components/Header";
 import Signup from "./components/Signup";
+import NotSureWhatToWatch from "./components/NotSureWhatToWatch";
 
 function App() {
   const [token, setToken] = useState("");
@@ -34,7 +35,7 @@ function App() {
       },
     );
     const data = await response.json();
-    console.log("GET MOVIES:", response.status, data);
+
     setMovies(data);
   }
 
@@ -71,7 +72,10 @@ function App() {
 
       {token && (
         <div>
+          <NotSureWhatToWatch movies={movies} />
+
           <MovieList movies={movies} />
+
           <AddMovie
             token={token}
             onMovieAdded={getMovies}

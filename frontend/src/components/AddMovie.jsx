@@ -4,7 +4,7 @@ import "./AddMovie.css";
 function AddMovie({ token, onMovieAdded, selectedMovie, onClose }) {
   const [tmdbId, setTmdbId] = useState(0);
   const [title, setTitle] = useState("");
-  const [watched, setWatched] = useState("");
+  const [watched, setWatched] = useState(false);
   const [personalRating, setPersonalRating] = useState(0);
   const [journal, setJournal] = useState("");
   const [posterPath, setPosterPath] = useState("");
@@ -76,14 +76,6 @@ function AddMovie({ token, onMovieAdded, selectedMovie, onClose }) {
         </div>
 
         <form onSubmit={handleAddMovie}>
-          <label>
-            Title
-            <input
-              type="text"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-            />
-          </label>
           <div className="watched-control">
             <p>Have you watched it?</p>
 
@@ -106,14 +98,22 @@ function AddMovie({ token, onMovieAdded, selectedMovie, onClose }) {
             </div>
           </div>
 
-          <label>
-            Personal Rating
-            <input
-              type="number"
-              value={personalRating}
-              onChange={(e) => setPersonalRating(Number(e.target.value))}
-            />
-          </label>
+          <div className="rating-control">
+            <p>Personal Rating</p>
+
+            <div className="rating-stars">
+              {[1, 2, 3, 4, 5].map((star) => (
+                <button
+                  key={star}
+                  type="button"
+                  className={star <= personalRating ? "selected" : ""}
+                  onClick={() => setPersonalRating(star)}
+                >
+                  ★
+                </button>
+              ))}
+            </div>
+          </div>
           <label>
             Journal
             <textarea
