@@ -8,6 +8,7 @@ import MovieSearch from "./components/MovieSearch";
 import Header from "./components/Header";
 import Signup from "./components/Signup";
 import NotSureWhatToWatch from "./components/NotSureWhatToWatch";
+import TrendingMovies from "./components/TrendingMovies";
 const API_URL = import.meta.env.VITE_API_URL;
 
 function App() {
@@ -17,6 +18,15 @@ function App() {
   const [loginOpen, setLoginOpen] = useState(false);
   const [signupOpen, setSignupOpen] = useState(false);
   const [username, setUsername] = useState("");
+  const [signupMessage, setSignupMessage] = useState("");
+
+  function handleSignupSuccess(username) {
+    setSignupMessage(`Account created successfully. Welcome, ${username}`);
+
+    setTimeout(() => {
+      setSignupMessage("");
+    }, 3000);
+  }
 
   async function checkApi() {
     const response = await fetch(`${API_URL}/healthcheck`);
@@ -50,6 +60,8 @@ function App() {
         username={username}
       />
 
+      {signupMessage && <div className="signup-success">{signupMessage}</div>}
+
       {loginOpen && (
         <Login
           setToken={setToken}
@@ -67,10 +79,13 @@ function App() {
           onClose={() => setSignupOpen(false)}
           setToken={setToken}
           setUsername={setUsername}
+          onSignupSuccess={handleSignupSuccess}
         />
       )}
 
       <MovieSearch onMovieSelected={setSelectedMovie} />
+
+      <TrendingMovies onMovieSelected={setSelectedMovie} />
 
       {token && (
         <div>
