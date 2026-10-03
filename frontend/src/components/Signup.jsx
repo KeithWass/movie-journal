@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 function Signup({ onClose, setToken, setUsername }) {
-  const [username, setUsername] = useState("");
+  const [signupUsername, setSignupUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -16,7 +16,7 @@ function Signup({ onClose, setToken, setUsername }) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          username,
+          username: signupUsername,
           email,
           password,
         }),
@@ -24,6 +24,7 @@ function Signup({ onClose, setToken, setUsername }) {
     );
 
     const data = await response.json();
+
     console.log("Signup response:", response.status, data);
 
     if (response.ok) {
@@ -39,14 +40,15 @@ function Signup({ onClose, setToken, setUsername }) {
         <button className="modal-close" type="button" onClick={onClose}>
           x
         </button>
+
         <h2>Sign Up</h2>
 
         <form onSubmit={handleSignup}>
           <input
             type="text"
             placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            value={signupUsername}
+            onChange={(e) => setSignupUsername(e.target.value)}
           />
 
           <input

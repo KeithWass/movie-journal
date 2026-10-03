@@ -22,8 +22,24 @@ const register = {
         },
       });
 
+      const token = jwt.sign(
+        {
+          userId: user.id,
+          username: user.username,
+          role: user.role,
+        },
+        process.env.JWT_SECRET,
+        { expiresIn: "1h" },
+      );
+
       const { passwordHash: _, ...safeUser } = user;
-      return h.response(safeUser).code(201);
+
+      return h
+        .response({
+          token,
+          user: safeUser,
+        })
+        .code(201);
     } catch (err) {
       return h
         .response({ error: "Username or email already in use" })
