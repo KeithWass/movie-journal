@@ -12,8 +12,6 @@ The project combines a **React frontend** with a **Hapi.js REST API**, PostgreSQ
 
 **Backend API:** https://movie-journal-o7uq.onrender.com
 
-> The application is currently under active development.
-
 ---
 
 ## Features
@@ -21,9 +19,10 @@ The project combines a **React frontend** with a **Hapi.js REST API**, PostgreSQ
 ### Film Discovery
 
 - Search for films using the TMDB API.
-- Display film posters, titles and descriptions.
+- Browse currently trending films.
+- Display film posters, titles and release dates.
 - Select a film from the search results to add to a personal collection.
-- Store TMDB film identifiers alongside journal entries.
+- Store TMDB film identifiers alongside movie entries.
 
 ### Personal Film Collection
 
@@ -35,7 +34,7 @@ The project combines a **React frontend** with a **Hapi.js REST API**, PostgreSQ
   - Journal entry
   - TMDB poster information
 - View films belonging to the authenticated user.
-- Update and delete personal entries.
+- Receive a random recommendation from unwatched films in the personal collection.
 
 ### Authentication & Authorisation
 
@@ -45,14 +44,6 @@ The project combines a **React frontend** with a **Hapi.js REST API**, PostgreSQ
 - Role-based authorisation with User and Admin roles.
 - Ownership checks ensure users can only access and modify their own film entries.
 - Administrators can manage all film entries.
-
-### Planned Features
-
-- Personalised film recommendations based on user preferences.
-- Random film recommendation.
-- Improved filtering and search.
-- Additional film metadata from TMDB.
-- User profile functionality.
 
 ---
 
@@ -189,6 +180,7 @@ The authorisation tests verify that:
 ### Deployment
 
 - Render
+- Netlify
 - Supabase
 
 ---
@@ -221,17 +213,14 @@ movie-journal/
 
 ---
 
-## Development Status
+## Current Status
 
-**Active development**
+### Completed
 
-### Implemented
-
-- ✅ RESTful movie API
-- ✅ PostgreSQL database
-- ✅ Prisma ORM
-- ✅ User registration and authentication
-- ✅ bcrypt password hashing
+- ✅ RESTful CRUD API
+- ✅ PostgreSQL database with Prisma ORM
+- ✅ User registration and login
+- ✅ Password hashing with bcrypt
 - ✅ JWT authentication
 - ✅ Role-based authorisation
 - ✅ Movie ownership checks
@@ -241,23 +230,26 @@ movie-journal/
 - ✅ Integration testing
 - ✅ React frontend
 - ✅ TMDB film search
+- ✅ Trending films
 - ✅ Film selection and addition
+- ✅ Watched/unwatched status
 - ✅ Personal ratings and journal entries
 - ✅ Movie poster storage
 - ✅ Film-card interface
+- ✅ Random unwatched film recommendation
 - ✅ Backend deployment with Render
 
-### In Development
+### Future Improvements
 
-- DFD visual design and branding
-- Improved film collection interface
-- Watched/unwatched organisation
-- Film recommendation functionality
-
-### Planned
-
-- Personalised recommendations
-- Random film recommendation
-- Advanced filtering
+- Edit saved films from the dossier
+- Improved filtering and sorting
+- More personalised recommendations
 - Additional TMDB metadata
 - User profile functionality
+- Further responsive/mobile improvements
+
+---
+
+## Development
+
+The project is currently being prepared for public deployment as a portfolio project.
