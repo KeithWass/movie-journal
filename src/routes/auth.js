@@ -8,7 +8,7 @@ const register = {
   options: { auth: false },
 
   handler: async (request, h) => {
-    const { username, email, password, role } = request.payload;
+    const { username, email, password } = request.payload;
 
     const passwordHash = await bcrypt.hash(password, 10);
 
@@ -18,7 +18,7 @@ const register = {
           username,
           email,
           passwordHash,
-          role: role || "user",
+          role: "user",
         },
       });
 
