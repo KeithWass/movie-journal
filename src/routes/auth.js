@@ -8,7 +8,7 @@ const register = {
   options: { auth: false },
 
   handler: async (request, h) => {
-    const { username, email, password, role } = request.payload;
+    const { username, email, password } = request.payload;
 
     const passwordHash = await bcrypt.hash(password, 10);
 
@@ -18,12 +18,28 @@ const register = {
           username,
           email,
           passwordHash,
-          role: role || "user",
+          role: "user",
         },
       });
 
+      const token = jwt.sign(
+        {
+          userId: user.id,
+          username: user.username,
+          role: user.role,
+        },
+        process.env.JWT_SECRET,
+        { expiresIn: "1h" },
+      );
+
       const { passwordHash: _, ...safeUser } = user;
-      return h.response(safeUser).code(201);
+
+      return h
+        .response({
+          token,
+          user: safeUser,
+        })
+        .code(201);
     } catch (err) {
       return h
         .response({ error: "Username or email already in use" })
@@ -55,7 +71,7 @@ const login = {
     }
 
     const token = jwt.sign(
-      { userId: user.id, role: user.role },
+      { userId: user.id, username: user.username, role: user.role },
       process.env.JWT_SECRET,
       { expiresIn: "1h" },
     );

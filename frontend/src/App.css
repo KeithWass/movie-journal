@@ -1,0 +1,40 @@
+body {
+  margin: 0;
+  font-family: "DM sans", sans-serif;
+  font-weight: 100;
+  background-color: #efefef;
+}
+
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 220px));
+  gap: 3rem;
+  padding: 30px;
+  list-style: none;
+}
+
+.signup-success {
+  position: fixed;
+  top: 90px;
+  right: 30px;
+  padding: 0.9rem 1.3rem;
+  background-color: #444;
+  color: white;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 2000;
+  animation: toastFadeIn 0.2s ease-out;
+}
+
+@keyframes toastFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

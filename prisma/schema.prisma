@@ -16,8 +16,10 @@ model MovieEntry {
   id             Int @id @default(autoincrement())
   tmdbId         Int
   title          String
+  releaseDate    String?
+  posterPath     String?
   personalRating Int?
-  status         String
+  watched        Boolean @default(false)
   journal        String?
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt

@@ -21,11 +21,11 @@ export async function getAllMoviesController(request, h) {
   try {
     const { userId, role } = request.auth.credentials;
 
-    const allMovies = await prisma.movieEntry.findMany();
+    // const allMovies = await prisma.movieEntry.findMany();
 
-    const userMovies = await prisma.movieEntry.findMany({
-      where: { userId },
-    });
+    // const userMovies = await prisma.movieEntry.findMany({
+    //   where: { userId },
+    // });
 
     const movies =
       role === "admin" ? await getAllMovies() : await getAllMovies(userId);

@@ -1,23 +1,77 @@
-# Movie Journal
+# DFD — Digital Film Dossier
 
-Movie Journal is a full-stack web application that allows users to discover, save and organise movies into a personal journal. Users can create a personalised collection of films, record ratings and journal entries, with planned support for personalised movie recommendations.
+**DFD (Digital Film Dossier)** is a full-stack web application for discovering, saving and organising films into a personal cinematic archive.
+
+Users can search for films using data from **The Movie Database (TMDB)**, add films to their personal collection, record their own ratings and journal entries, and manage their collection through an authenticated account.
+
+The project combines a **React frontend** with a **Hapi.js REST API**, PostgreSQL and Prisma, with JWT-based authentication and user ownership controls.
+
+## Live Project
+
+**Frontend:** [Add deployed frontend URL]
+
+**Backend API:** https://movie-journal-o7uq.onrender.com
+
+---
 
 ## Features
 
-- Full CRUD functionality for movie entries
-- RESTful API built with Hapi.js
-- Prisma ORM with PostgreSQL database
-- Deployed backend using Railway
-- Unit testing with Jest
-- User registration and login
-- Password hashing using bcrypt
-- JWT authentication
-- Role-based access control (User and Admin)
-- Ownership checks to ensure users can only modify their own movie entries
-- Integration tests covering authentication and authorisation
-- Postman collection included for API testing
+### Film Discovery
 
-## API Endpoints
+- Search for films using the TMDB API.
+- Browse currently trending films.
+- Display film posters, titles and release dates.
+- Select a film from the search results to add to a personal collection.
+- Store TMDB film identifiers alongside movie entries.
+
+### Personal Film Collection
+
+- Create personal film entries.
+- Record:
+  - Film title
+  - Watched status
+  - Personal rating
+  - Journal entry
+  - TMDB poster information
+- View films belonging to the authenticated user.
+- Receive a random recommendation from unwatched films in the personal collection.
+
+### Authentication & Authorisation
+
+- User registration and login.
+- Password hashing using bcrypt.
+- JWT-based authentication.
+- Role-based authorisation with User and Admin roles.
+- Ownership checks ensure users can only access and modify their own film entries.
+- Administrators can manage all film entries.
+
+---
+
+## Architecture
+
+```text
+React Frontend
+      │
+      │ HTTP / JSON
+      ▼
+Hapi.js REST API
+      │
+      ├── JWT Authentication
+      ├── Authorisation
+      ├── TMDB API
+      │
+      ▼
+Prisma ORM
+      │
+      ▼
+PostgreSQL / Supabase
+```
+
+This project uses a separated frontend/backend architecture. The React application communicates with the Hapi API through HTTP requests, while the API handles authentication, authorisation, business logic and database access.
+
+---
+
+## API
 
 ### Public Routes
 
@@ -29,67 +83,135 @@ Movie Journal is a full-stack web application that allows users to discover, sav
 
 ### Protected Routes
 
-| Method | Endpoint       | Description              |
-| ------ | -------------- | ------------------------ |
-| POST   | `/movies`      | Create a new movie entry |
-| GET    | `/movies`      | Retrieve movie entries   |
-| GET    | `/movies/{id}` | Retrieve a movie by ID   |
-| PATCH  | `/movies/{id}` | Update a movie entry     |
-| DELETE | `/movies/{id}` | Delete a movie entry     |
+| Method | Endpoint       | Description            |
+| ------ | -------------- | ---------------------- |
+| POST   | `/movies`      | Create a movie entry   |
+| GET    | `/movies`      | Retrieve movie entries |
+| GET    | `/movies/{id}` | Retrieve a movie by ID |
+| PATCH  | `/movies/{id}` | Update a movie entry   |
+| DELETE | `/movies/{id}` | Delete a movie entry   |
 
-Protected routes require a valid JWT to be sent as a Bearer token in the `Authorization` header.
+Protected routes require a valid JWT supplied as a Bearer token in the `Authorization` header.
+
+---
 
 ## Authentication & Authorisation
 
-This project uses **JSON Web Tokens (JWT)** for stateless authentication. I chose JWT rather than server-side sessions because the application uses a separate React frontend and Hapi backend. After login, the frontend can send the JWT with each protected API request in the Authorization header, allowing the backend to authenticate the user without maintaining server-side session state. This approach also fits the application's cross-origin client/API architecture, where the frontend and backend are deployed separately.
+The application uses **JSON Web Tokens (JWT)** for stateless authentication.
 
-Passwords are securely hashed using bcrypt before being stored in the database.
+I chose JWT because the application uses a separate React frontend and Hapi backend. After authentication, the frontend sends the JWT with protected API requests, allowing the backend to authenticate the user without maintaining server-side sessions.
 
-Authorisation rules include:
+Passwords are hashed using **bcrypt** before being stored in the database.
 
-- Users can only view, update and delete their own movie entries.
-- Administrators have permission to manage all movie entries.
-- Ownership checks are performed on every protected route.
+Authorisation is enforced at the API level:
+
+- Users can only access their own movie entries.
+- Users cannot modify or delete another user's entries.
+- Administrators can manage all movie entries.
+- Ownership checks are performed on protected movie routes.
+
+---
 
 ## Testing
 
-The project includes:
+The backend includes both unit and integration testing using Jest.
 
-- Unit tests for the service layer using mocked Prisma methods.
-- Integration tests using Hapi's `server.inject()`.
-- Authentication tests.
-- Authorisation tests proving:
-  - Unauthenticated users receive `401 Unauthorized`.
-  - Users cannot modify another user's movie entries.
-  - Users cannot delete another user's movie entries.
-  - Administrators can edit any movie entry.
-  - Administrators can delete any movie entry.
-  - Users only receive their own movie entries.
-  - Administrators can retrieve all movie entries.
+### Unit Testing
 
-## Postman Collection
+Service-layer functionality is tested using mocked Prisma methods.
 
-A Postman collection is included in the `postman/` directory.
+### Integration Testing
 
-Import the collection into Postman, register or log in to obtain a JWT, then use the returned token to test the protected endpoints.
+Hapi's `server.inject()` is used to test API behaviour without requiring a running HTTP server.
+
+Tests cover:
+
+- User registration
+- Authentication
+- Protected routes
+- Unauthenticated requests
+- Ownership checks
+- User-specific movie retrieval
+- Administrator access
+- Updating movie entries
+- Deleting movie entries
+
+The authorisation tests verify that:
+
+- Unauthenticated users receive `401 Unauthorized`.
+- Users cannot modify another user's movie entries.
+- Users cannot delete another user's movie entries.
+- Users only receive their own movie entries.
+- Administrators can manage movie entries across users.
+
+---
 
 ## Tech Stack
 
-### Backend
-
-- Hapi.js
-- Node.js
-- Prisma ORM
-- PostgreSQL
-
 ### Frontend
 
-- React (coming soon)
+- React
+- Vite
+- JavaScript
+- HTML
+- CSS
+
+### Backend
+
+- Node.js
+- Hapi.js
+- JavaScript
+- Prisma ORM
+- PostgreSQL
+- Supabase
+- JWT
+- bcrypt
+
+### External APIs
+
+- TMDB API
 
 ### Testing
 
 - Jest
+- Hapi `server.inject()`
 - Postman
+
+### Deployment
+
+- Render
+- Netlify
+- Supabase
+
+---
+
+## Project Structure
+
+```text
+movie-journal/
+├── frontend/
+│   └── src/
+│       ├── components/
+│       ├── App.jsx
+│       └── App.css
+│
+├── src/
+│   ├── controllers/
+│   ├── routes/
+│   ├── services/
+│   ├── lib/
+│   └── start.js
+│
+├── prisma/
+│   ├── schema.prisma
+│   └── migrations/
+│
+├── tests/
+├── postman/
+└── README.md
+```
+
+---
 
 ## Current Status
 
@@ -101,14 +223,33 @@ Import the collection into Postman, register or log in to obtain a JWT, then use
 - ✅ Password hashing with bcrypt
 - ✅ JWT authentication
 - ✅ Role-based authorisation
-- ✅ Ownership checks
+- ✅ Movie ownership checks
+- ✅ User-specific movie retrieval
+- ✅ CRUD operations
 - ✅ Unit testing
 - ✅ Integration testing
-- ✅ Railway deployment
+- ✅ React frontend
+- ✅ TMDB film search
+- ✅ Trending films
+- ✅ Film selection and addition
+- ✅ Watched/unwatched status
+- ✅ Personal ratings and journal entries
+- ✅ Movie poster storage
+- ✅ Film-card interface
+- ✅ Random unwatched film recommendation
+- ✅ Backend deployment with Render
 
-### Next Steps
+### Future Improvements
 
-- Frontend integration
-- Movie recommendation engine
-- Improved search and filtering
-- User profile enhancements
+- Edit saved films from the dossier
+- Improved filtering and sorting
+- More personalised recommendations
+- Additional TMDB metadata
+- User profile functionality
+- Further responsive/mobile improvements
+
+---
+
+## Development
+
+The project is currently being prepared for public deployment as a portfolio project.
