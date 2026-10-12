@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./Signup.css";
 
 function Signup({ onClose, setToken, setUsername, onSignupSuccess }) {
   const [signupUsername, setSignupUsername] = useState("");
@@ -66,7 +67,9 @@ function Signup({ onClose, setToken, setUsername, onSignupSuccess }) {
             onChange={(e) => setPassword(e.target.value)}
           />
 
-          <button type="submit">Sign Up</button>
+          <button className="signup-button" type="submit">
+            Sign Up
+          </button>
         </form>
       </div>
     </div>

@@ -9,3 +9,21 @@
   font-size: 0.9rem;
   z-index: 2000;
 }
+
+.signup-button {
+  padding: 1rem;
+  border: 1px solid #00e5ff;
+  border-radius: 12px;
+  font-size: 1rem;
+  box-sizing: border-box;
+
+  background: #17171f;
+  color: #00e5ff;
+  cursor: pointer;
+}
+
+.signup-button:hover {
+  background: #00e5ff;
+  color: #0d0d12;
+  box-shadow: 0 0 12px rgba(0, 229, 255, 0.4);
+}
