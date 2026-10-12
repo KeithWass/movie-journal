@@ -7,6 +7,7 @@
   font-size: 2.2rem;
   font-weight: 400;
   margin-bottom: 2rem;
+  text-shadow: 0 0 8px rgba(23, 168, 181, 0.662);
 }
 
 .search-bar {
@@ -20,7 +21,7 @@
   padding: 0.8rem 1rem;
   font-size: 1rem;
   border: 1px solid #00e5ff;
-  box-shadow: 0 0 12px rgba(0, 229, 255, 0.25);
+  box-shadow: 0 0 12px rgba(0, 229, 255, 0.433);
   border-radius: 6px;
   box-sizing: border-box;
   font-family: inherit;
