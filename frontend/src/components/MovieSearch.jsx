@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./MovieSearch.css";
+
 const API_URL = import.meta.env.VITE_API_URL;
 
 function MovieSearch({ onMovieSelected }) {
@@ -32,10 +33,11 @@ function MovieSearch({ onMovieSelected }) {
           <button onClick={handleSearch}>Search</button>
         </div>
       </div>
+
       <ul className="search-results">
         {results.map((movie) => (
           <li
-            className="film-card"
+            className="search-result-card"
             key={movie.id}
             onClick={() => {
               setSelectedMovie(movie);
@@ -43,13 +45,19 @@ function MovieSearch({ onMovieSelected }) {
             }}
           >
             <img
-              className="film-poster"
+              className="search-result-poster"
               src={`https://image.tmdb.org/t/p/w200${movie.posterPath}`}
+              alt={movie.title}
             />
-            <div className="film-details">
-              <h2 className="film-title">{movie.title}</h2>
-              <p className="film-year">({movie.releaseDate.slice(0, 4)})</p>
-              <p className="film-description">{movie.overview}</p>
+
+            <div className="search-result-details">
+              <h2 className="search-result-title">{movie.title}</h2>
+
+              <p className="search-result-year">
+                ({movie.releaseDate.slice(0, 4)})
+              </p>
+
+              <p className="search-result-description">{movie.overview}</p>
             </div>
           </li>
         ))}

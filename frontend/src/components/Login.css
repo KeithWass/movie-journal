@@ -8,10 +8,11 @@
 }
 
 .login-modal {
-  background: #fffdfd;
+  background: #17171f;
+  color: #e8e8e8;
   padding: 2.5rem;
   width: 360px;
-  border: 1px solid #ccc;
+  border: 1px solid #444;
   border-radius: 8px;
   position: relative;
   animation: fadeIn 0.4s ease-out;
@@ -27,10 +28,17 @@
 
 .login-modal input {
   padding: 1rem;
-  border: 1px solid #ccc;
+  border: 1px solid #444;
   border-radius: 12px;
   font-size: 1rem;
   box-sizing: border-box;
+
+  background: #0d0d12;
+  color: #e8e8e8;
+}
+
+.login-modal input::placeholder {
+  color: #777;
 }
 
 .login-modal input:focus {
@@ -62,13 +70,39 @@
 
 .login-button {
   padding: 1rem;
-  border: 1px solid #ccc;
+  border: 1px solid #00e5ff;
   border-radius: 12px;
   font-size: 1rem;
   box-sizing: border-box;
+
+  background: #17171f;
+  color: #00e5ff;
+  cursor: pointer;
 }
 
-.sigup-prompt {
+.login-button:hover {
+  background: #00e5ff;
+  color: #0d0d12;
+  box-shadow: 0 0 12px rgba(0, 229, 255, 0.4);
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  border: none;
+  background: none;
+  color: #e8e8e8;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.modal-close:hover {
+  color: #00e5ff;
+  text-shadow: 0 0 8px rgba(0, 229, 255, 0.6);
+}
+
+.signup-prompt {
   text-align: center;
   margin-top: 1.5rem;
 }

@@ -2,13 +2,14 @@ body {
   margin: 0;
   font-family: "DM sans", sans-serif;
   font-weight: 100;
-  background-color: #efefef;
+  background-color: #0d0d12;
+  color: #e8e8e8;
 }
 
 .movie-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 220px));
-  gap: 3rem;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 2.5rem 1.5rem;
   padding: 30px;
   list-style: none;
 }
@@ -37,4 +38,16 @@ body {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.dossier-section {
+  scroll-margin-top: 2rem;
+}
+
+.dossier-title {
+  text-align: center;
+  margin: 4rem 0 2rem;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #e8e8e8;
 }

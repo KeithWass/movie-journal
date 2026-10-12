@@ -23,7 +23,22 @@ function Header({ onLogin, token, setToken, username }) {
           {token && menuOpen && (
             <div className="account-menu">
               <p>Hello, {username}!</p>
-              <button>My Dossier</button>
+              <button
+                onClick={() => {
+                  console.log("My Dossier clicked");
+
+                  const dossier = document.getElementById("dossier");
+
+                  if (dossier) {
+                    dossier.scrollIntoView({
+                      behavior: "smooth",
+                      block: "start",
+                    });
+                  }
+                }}
+              >
+                My Dossier
+              </button>
               <button>Account</button>
               <Logout
                 setToken={setToken}
