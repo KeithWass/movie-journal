@@ -1,7 +1,13 @@
 import { useEffect, useState } from "react";
 import "./AddMovie.css";
 
-function AddMovie({ token, onMovieAdded, selectedMovie, onClose }) {
+function AddMovie({
+  token,
+  onMovieAdded,
+  selectedMovie,
+  editingMovie,
+  onClose,
+}) {
   const [tmdbId, setTmdbId] = useState(0);
   const [title, setTitle] = useState("");
   const [watched, setWatched] = useState(false);
@@ -12,34 +18,48 @@ function AddMovie({ token, onMovieAdded, selectedMovie, onClose }) {
 
   useEffect(() => {
     if (selectedMovie) {
-      setTmdbId(selectedMovie.id);
+      setTmdbId(selectedMovie.tmdbId || selectedMovie.id);
       setTitle(selectedMovie.title);
       setPosterPath(selectedMovie.posterPath);
       setReleaseDate(selectedMovie.releaseDate);
+
+      if (editingMovie) {
+        setWatched(selectedMovie.watched);
+        setPersonalRating(selectedMovie.personalRating || 0);
+        setJournal(selectedMovie.journal || "");
+      } else {
+        setWatched(false);
+        setPersonalRating(0);
+        setJournal("");
+      }
     }
-  }, [selectedMovie]);
+  }, [selectedMovie, editingMovie]);
 
   async function handleAddMovie(e) {
     e.preventDefault();
-    const response = await fetch(
-      "https://movie-journal-o7uq.onrender.com/movies",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          tmdbId,
-          title,
-          releaseDate,
-          posterPath,
-          watched,
-          personalRating,
-          journal,
-        }),
+
+    const url = editingMovie
+      ? `https://movie-journal-o7uq.onrender.com/movies/${selectedMovie.id}`
+      : "https://movie-journal-o7uq.onrender.com/movies";
+
+    const method = editingMovie ? "PATCH" : "POST";
+
+    const response = await fetch(url, {
+      method,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
-    );
+      body: JSON.stringify({
+        tmdbId,
+        title,
+        releaseDate,
+        posterPath,
+        watched,
+        personalRating,
+        journal,
+      }),
+    });
 
     const data = await response.json();
 
@@ -119,7 +139,9 @@ function AddMovie({ token, onMovieAdded, selectedMovie, onClose }) {
               onChange={(e) => setJournal(e.target.value)}
             />
           </label>
-          <button type="submit">Add Movie</button>
+          <button type="submit">
+            {editingMovie ? "Save Changes" : "Add Movie"}
+          </button>
         </form>
       </div>
     </div>

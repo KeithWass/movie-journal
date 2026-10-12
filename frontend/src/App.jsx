@@ -19,6 +19,7 @@ function App() {
   const [signupOpen, setSignupOpen] = useState(false);
   const [username, setUsername] = useState("");
   const [signupMessage, setSignupMessage] = useState("");
+  const [editingMovie, setEditingMovie] = useState(false);
 
   function handleSignupSuccess(username) {
     setSignupMessage(`Account created successfully. Welcome, ${username}`);
@@ -91,12 +92,19 @@ function App() {
         <div>
           <NotSureWhatToWatch movies={movies} />
 
-          <MovieList movies={movies} />
+          <MovieList
+            movies={movies}
+            onMovieSelected={(movie) => {
+              setSelectedMovie(movie);
+              setEditingMovie(true);
+            }}
+          />
 
           <AddMovie
             token={token}
             onMovieAdded={getMovies}
             selectedMovie={selectedMovie}
+            editingMovie={editingMovie}
             onClose={() => setSelectedMovie(null)}
           />
         </div>

@@ -1,10 +1,8 @@
 import "./FilmCard.css";
 
-function FilmCard({ movie }) {
-  console.log(movie);
-
+function FilmCard({ movie, onMovieSelected }) {
   return (
-    <div className="film-card">
+    <div className="film-card" onClick={() => onMovieSelected(movie)}>
       <img
         className="film-poster"
         src={`https://image.tmdb.org/t/p/w200${movie.posterPath}`}
