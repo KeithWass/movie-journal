@@ -7,16 +7,28 @@
   background: #0d0d12;
   color: #e8e8e8;
 
-  box-shadow: 0 2px 12px rgba(0, 229, 255, 0.08);
+  box-shadow: 0 2px 12px rgba(0, 229, 255, 0.713);
 
   position: relative;
 }
+
+/* CHROMATIC ABBERATION EFFECT*/
+
+/* .brand h1 {
+  margin: 0;
+  font-size: 3rem;
+  color: #e8e8e8;
+  text-shadow:
+    -1px 0 rgba(255, 0, 80, 0.4),
+    1px 0 rgba(0, 229, 255, 0.4),
+    0 0 6px rgba(255, 255, 255, 0.15);
+} */
 
 .brand h1 {
   margin: 0;
   font-size: 3rem;
   color: #e8e8e8;
-  text-shadow: 0 0 8px rgba(0, 229, 255, 0.5);
+  text-shadow: 0 0 8px rgba(0, 229, 255, 0.639);
 }
 
 .brand p {
@@ -45,6 +57,7 @@
   justify-content: center;
   font-size: 0.9rem;
   cursor: pointer;
+  box-shadow: 0 0 8px rgba(0, 229, 255, 0.85);
 }
 
 .account-menu {
