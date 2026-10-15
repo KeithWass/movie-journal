@@ -65,3 +65,11 @@ body {
   letter-spacing: 0.15em;
   color: #888;
 }
+
+@media (max-width: 600px) {
+  .movie-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem 0.7rem;
+    padding: 15px;
+  }
+}
